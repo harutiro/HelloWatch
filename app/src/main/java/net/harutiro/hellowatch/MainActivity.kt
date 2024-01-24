@@ -2,6 +2,7 @@ package net.harutiro.hellowatch
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -26,6 +27,20 @@ class MainActivity : Activity() , SensorEventListener {
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION)
+
+
+        binding.startServiceButton.setOnClickListener {
+            val intent = Intent(this,SensorService::class.java)
+
+            startForegroundService(intent)
+        }
+
+        binding.stopServiceButton.setOnClickListener {
+            val intent = Intent(this,SensorService::class.java)
+
+            stopService(intent)
+
+        }
 
     }
 
